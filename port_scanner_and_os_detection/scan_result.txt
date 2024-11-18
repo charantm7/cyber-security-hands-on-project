@@ -1,0 +1,7 @@
+
+Port 80 is open (http)
+Port 443 is open (https)
+Port 80 is open (http)
+Port 80 is open (http)
+Port 80 is open (http) on the host 142.250.71.110
+Port 80 is open (http) on the host 142.250.71.110
