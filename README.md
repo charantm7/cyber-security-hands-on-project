@@ -1,1 +1,1 @@
-# cyber-security-hands-on-project
+# cyber-security-hands-on-projects
