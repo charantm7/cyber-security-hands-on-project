@@ -2,7 +2,6 @@ import pyfiglet
 import sys
 import socket
 from datetime import datetime
-from tqdm import tqdm
 from scapy.all import IP, TCP, sr1, conf
 
 #ASCII is american standard code of information interchange
@@ -34,11 +33,11 @@ def detect_os(ip):
         if resp:
             ttl = resp.ttl
             if ttl <= 64:
-                print(f"OS Detection: Target {ip} is likely running a Linux-based OS.")
+                print(f"OS Detection: Target {ip} is likely running on a Linux-based OS.")
             elif ttl > 64 and ttl <= 128:
-                print(f"OS Detection: Target {ip} is likely running a Windows-based OS.")
+                print(f"OS Detection: Target {ip} is likely running on a Windows-based OS.")
             else:
-                print(f"OS Detection: Target {ip} OS is unknown.")
+                print(f"OS Detection: Target {ip} OS is unknown or Unable to Detect.")
         else:
             print(f"OS Detection: No response from {ip}.")
     except Exception as e:
