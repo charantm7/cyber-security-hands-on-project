@@ -7,8 +7,7 @@ from scapy.all import IP, TCP, sr1, conf
 #ASCII is american standard code of information interchange
 #th emodulw pyfiglet is used to generate grafical image of the given string and 
 # figlet_format is a key word in pyfiglet library it convert the string that we provided and turns into ASCII art.
-
-ascii_banner = pyfiglet.figlet_format("PORT SCANNER")
+ascii_banner = pyfiglet.figlet_format("PORT SCANNER",font="slant")
 print(ascii_banner)
 
 # sys.argv is a list which has its first value as executing file port_scanner.py[0] and the elements are added from the second index.
@@ -19,7 +18,6 @@ if len(sys.argv) == 2:
 else:
 	print("Invalid amount of Argument")
 
-# Add Banner 
 print("-" * 50)
 print("Scanning Target: " + target)
 print("Scanning started at: " + str(datetime.now()))
@@ -28,13 +26,20 @@ print("-" * 50)
 conf.use_pcap = True 	
 def detect_os(ip):
     try:
-        pkt = IP(dst=ip)/TCP(dport=80, flags="S")  # Create SYN packet
-        resp = sr1(pkt, timeout=2, verbose=0)      # Send packet and wait for response
+		#sends the packet to the particular IP address
+		#creates a packets for a destined IP and it is attach with TCP, and dport=80(http) is used for to
+		#send the packets to the specfied port caz port 80 which is commonly opened in many devices.
+        pkt = IP(dst=ip)/TCP(dport=80, flags="S")  # flags='s' create SYN packet
+        resp = sr1(pkt, timeout=2, verbose=0) #send the packets to the IP,  if the reponse from the target address within the 2sec timout 
+		#and the repose id stored in the resp, if not it return None.
         if resp:
+			#it retrive the ttl(Time to Live) value and stores in the ttl.
             ttl = resp.ttl
             if ttl <= 64:
+				#Basically the linux based os have the default ttl value till 64.
                 print(f"OS Detection: Target {ip} is likely running on a Linux-based OS.")
             elif ttl > 64 and ttl <= 128:
+				#windows has ttl from (65 to 128)
                 print(f"OS Detection: Target {ip} is likely running on a Windows-based OS.")
             else:
                 print(f"OS Detection: Target {ip} OS is unknown or Unable to Detect.")
@@ -43,7 +48,7 @@ def detect_os(ip):
     except Exception as e:
         print(f"Error in OS detection: {e}")
 
-# Example usage
+#calling the func
 detect_os(target)
 
 try:
