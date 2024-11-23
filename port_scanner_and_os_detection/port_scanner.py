@@ -53,15 +53,17 @@ def detect_os(ip):
 
 #calling the func
 detect_os(target)
-print("-"*55)
-try:
-	print("1. Search for Only Opened Ports (Slow)\n2. search for Ports in Range (Recommended)\n3. Quick Scan (Fast)")
-	choice = int(input("[1/2/3]: "))
-	if choice == 1:
-		print("Estimated Time to scan (1024) ports is 1-2min!")
-		print("Waiting for response........\n")
+print("-"*74)
+print("1. Scan Only Opened Ports (Slow)\n2. Scan Ports in Range (Recommended)\n3. Quick port Scan (Fast)")
+choice = int(input("[1/2/3]: "))
+if choice == 1:
+	try:
+		print("-"*38)
+		print("Scan only opened ports has started....")
+		print("-"*38)
+		print("1024 ports are scanning Wait for response........\n")
 		# will scan ports between 1 to 1024 common ports and registered ports
-		start = time.time()
+		start_time_1 = time.time()
 		for port in range(1,1024):
 			#AF_INET means ipv4 address and SOCK_STREAM specifies the TCP
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -80,18 +82,34 @@ try:
 				s.close()
 		if result != 0:
 			print(f"-->No ports are opened on {target}<--")
-		end =time.time()
-		print(f"-->Time taken {end-start:.2f} seconds!<--")
+		end_time_1 =time.time()
+		print(f"-->Time taken {end_time_1-start_time_1:.2f} seconds!<--")
+	except KeyboardInterrupt:
+		print("\nKeyboard Interrupt")
+		print("Exiting Program !!!!")
+		sys.exit()
+	#if host name is not able to convert into the ip gaierror will occur
+	except socket.gaierror:
+			print("\n Hostname Couldn't be Convert into Ip (or) Ivalid Host name !!!!")
+			sys.exit()
+	#if th target server in not responded
+	except socket.error:
+			print("\n Target Server not responding !!!!")
+			sys.exit()
 
-	elif choice == 2:
-		start_port_1 = int(input("Enter the starting port: "))
-		end_port_1 = int(input("Enter the ending port: "))
+elif choice == 2:
+	try:
+		print("-"*35)
+		print("Scan ports in range has started....")
+		print("-"*35)
+		start_port_1 = int(input("Starting port: "))
+		end_port_1 = int(input("Ending port: "))
 		print("-"*54)
 		print(f"Scanning ports from {start_port_1} to {end_port_1} on Target {target}")
 		print("-"*54)
 		print("Waiting for response.....")
 		# will scan ports between 1 to 65,535
-		starttime=time.time()
+		start_time_2=time.time()
 		for port in range(start_port_1,end_port_1+1):
 			#AF_INET means ipv4 address and SOCK_STREAM specifies the TCP
 			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -110,55 +128,74 @@ try:
 				else:
 					print(f"port {port} is closed or filtered")
 				s.close()
-		endtime=time.time()
-		print(f"-->Time take {endtime-starttime:.2f} seconds<--")
+		end_time_2=time.time()
+		print(f"-->Time taken {end_time_2-start_time_2:.2f} seconds<--")
 
-	elif choice==3:
-		start_port_2 = int(input("Enter the starting port: "))
-		end_port_2 = int(input("Enter the end port: "))
-		#its a normal port scanning code you would see in the choice 1 section
-		def scan_port(ip, port):
-			try:
-				s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-				s.settimeout(1)
-				result = s.connect_ex((ip, port))
-				if result == 0:
-					print(f"Port {port} is OPEN")
-				else:
-					print(f"Port {port} is CLOSED")
-				s.close()
-			except socket.error as e:
-				print(f"Error scanning port {port}: {e}")
-
-		def quick_scan(ip, port_range):
-			print(f"Starting quick scan on {ip}")
-			
-			#creates a list to store the threads
-			threads = []
-			for port in range(port_range[0], port_range[1] + 1):
-				thread = threading.Thread(target=scan_port, args=(ip, port)) #it createa a new thread by using threading.Thread 
-				threads.append(thread)
-				thread.start()
-			
-			# Wait for all threads to complete
-			for thread in threads:
-				thread.join()
-		port_range = (start_port_2,end_port_2)
-		ip=target
-		quick_scan(ip, port_range)
-	else:
-		print("Invalid Input")
-		sys.exit(1)
-
-except KeyboardInterrupt:
+	except KeyboardInterrupt:
 		print("\nKeyboard Interrupt")
 		print("Exiting Program !!!!")
 		sys.exit()
-#if host name is not able to convert into the ip gaierror will occur
-except socket.gaierror:
-		print("\n Hostname Couldn't be Convert into Ip (or) Ivalid Host name !!!!")
-		sys.exit()
-#if th target server in not responded
-except socket.error:
-		print("\n Target Server not responding !!!!")
-		sys.exit()
+	#if host name is not able to convert into the ip gaierror will occur
+	except socket.gaierror:
+			print("\n Hostname Couldn't be Convert into Ip (or) Ivalid Host name !!!!")
+			sys.exit()
+	#if th target server in not responded
+	except socket.error:
+			print("\n Target Server not responding !!!!")
+			sys.exit()
+
+elif choice==3:
+	print("-"*31)
+	print("Quick port Scan has started....")
+	print("-"*31)
+	start_port_2 = int(input("Starting port: "))
+	end_port_2 = int(input("Ending port: "))
+	#its a normal port scanning code you would see in the choice 1 section
+	def scan_port(ip, port):
+		try:
+			s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			s.settimeout(1)
+			result = s.connect_ex((ip, port))
+			if result == 0:
+				print(f"Port {port} is OPEN")
+			else:
+				print(f"Port {port} is CLOSED or FILTERED")
+			s.close()
+		except socket.error as e:
+			print(f"Error scanning port {port}: {e}")
+		#if host name is not able to convert into the ip gaierror will occur
+		except socket.gaierror:
+				print("\n Hostname Couldn't be Convert into Ip (or) Ivalid Host name !!!!")
+				sys.exit()
+		#if th target server in not responded
+		except socket.error:
+				print("\n Target Server not responding !!!!")
+				sys.exit()
+	#by using the threading func its going to perform quick scan 
+	#the thread is basic unit type of a process or else it is the mini-process under the process name
+	#by using the threading func, it creates a new thread for each port and adds to the list
+	#and simultaneously all threads of each port will be executed
+	def quick_scan(ip, port_range):
+		print(f"Starting quick scan on {ip} from port {start_port_2} to {end_port_2}")
+		start_time_3=time.time()
+		#creates a list to store the threads
+		threads = []
+		for port in range(port_range[0], port_range[1] + 1):
+			thread = threading.Thread(target=scan_port, args=(ip, port)) #it createa a new thread by using threading.Thread and indicating the scan_port as a target to execute the program 
+			#it adds the thread to a threads list 
+			threads.append(thread)
+			thread.start()
+		#it will wait for all threads to be executed
+		for thread in threads:
+			thread.join()
+		end_time_3 = time.time()
+		print(f"-->Time taken {end_time_3-start_time_3:.2f} seconds<--")
+		
+	#initializing the port range which is inputed from the user
+	port_range = (start_port_2,end_port_2)
+	ip=target
+	quick_scan(ip, port_range)
+else:
+	print("Invalid Input")
+	sys.exit(1)
+
