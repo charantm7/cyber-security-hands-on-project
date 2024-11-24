@@ -41,11 +41,11 @@ This tool is ideal for beginners and cybersecurity enthusiasts looking to learn 
    time
    threading
    scapy
-   ![Installing Libraries](image.png)
+   ![Installing Libraries](assets/port%202.png)
 
 ## Run the script with the following command:
 
-![Run the script command](image-1.png)
+![Run the script command](assets/port%201.png)
 
 ## Options:
 
@@ -68,3 +68,8 @@ After launching the script, choose one of the following scanning options:
 
 4. OS Detection
    > The tool automatically detects the target's OS and displays the result.
+
+## Output
+
+![Run the script command](assets/port%203.png)
+![Run the script command](assets/port%204.png)
