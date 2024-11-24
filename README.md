@@ -27,10 +27,10 @@ This tool is ideal for beginners and cybersecurity enthusiasts looking to learn 
 1. Port Scanning:
 > The tool uses TCP connections to identify open ports on the target machine.
 2. OS Detection:
->> The TTL value from the response packet is analyzed:
-> TTL ≤ 64: Likely Linux-based OS.
-> TTL > 64 and ≤ 128: Likely Windows-based OS.
-> TTL > 128: Unknown or other OS.
+a. The TTL value from the response packet is analyzed:
+b. TTL ≤ 64: Likely Linux-based OS.
+c. TTL > 64 and ≤ 128: Likely Windows-based OS.
+d. TTL > 128: Unknown or other OS.
 
 ## Requirements:
 
