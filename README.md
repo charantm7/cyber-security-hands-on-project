@@ -25,12 +25,12 @@ This tool is ideal for beginners and cybersecurity enthusiasts looking to learn 
 ## How It Works:
 
 1. Port Scanning:
-   > The tool uses TCP connections to identify open ports on the target machine.
+   - The tool uses TCP connections to identify open ports on the target machine.
 2. OS Detection:
-   > The TTL value from the response packet is analyzed:
-   > TTL ≤ 64: Likely Linux-based OS.
-   > TTL > 64 and ≤ 128: Likely Windows-based OS.
-   > TTL > 128: Unknown or other OS.
+   - The TTL value from the response packet is analyzed:
+   - TTL ≤ 64: Likely Linux-based OS.
+   - TTL > 64 and ≤ 128: Likely Windows-based OS.
+   - TTL > 128: Unknown or other OS.
 
 ## Requirements:
 
@@ -41,7 +41,7 @@ This tool is ideal for beginners and cybersecurity enthusiasts looking to learn 
    time
    threading
    scapy
-   ![Installing Libraries](assets/port%202.png)
+   ![Installing Libraries](image.png)
 
 ## Run the script with the following command:
 
@@ -53,23 +53,18 @@ After launching the script, choose one of the following scanning options:
 
 1. Open Port Scan
 
-   > Scans all 1024 common ports for open ports.
-   > Output: Displays and logs open ports with their associated services.
+   - Scans all 1024 common ports for open ports.
+   - Output: Displays and logs open ports with their associated services.
 
 2. Range Port Scan
 
-   > Prompts for a start and end port.
-   > Scans only within the specified range, reducing scan time.
+   - Prompts for a start and end port.
+   - Scans only within the specified range, reducing scan time.
 
 3. Quick Port Scan
 
-   > Prompts for a start and end port.
-   > Performs multithreaded scanning for rapid results.
+   - Prompts for a start and end port.
+   - Performs multithreaded scanning for rapid results.
 
 4. OS Detection
    > The tool automatically detects the target's OS and displays the result.
-
-## Output
-
-![Run the script command](assets/port%203.png)
-![Run the script command](assets/port%204.png)
