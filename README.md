@@ -36,12 +36,12 @@ This tool is ideal for beginners and cybersecurity enthusiasts looking to learn 
 
 1. Python 3.7+
 2. Libraries:
-   > pyfiglet
-   > socket
-   > time
-   > threading
-   > scapy
-   > ![Installing Libraries](image.png)
+   pyfiglet
+   socket
+   time
+   threading
+   scapy
+   ![Installing Libraries](image.png)
 
 ## Run the script with the following command:
 
