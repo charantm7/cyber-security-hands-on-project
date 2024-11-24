@@ -1,11 +1,11 @@
 # Port Scanner
 
-##Overview:
+## Overview:
 
 Port Scanner is a Python-based tool designed for performing network port scanning efficiently and effectively. It offers three methods of port scanning, tailored to different needs, along with an operating system detection feature based on TTL (Time-To-Live) values.
 This tool is ideal for beginners and cybersecurity enthusiasts looking to learn or perform port scanning in a controlled environment.
 
-##Features:
+## Features:
 
 1. Open Port Scan (Slow)
    Scans the first 1024 ports, displaying only the open ones.
@@ -22,12 +22,12 @@ This tool is ideal for beginners and cybersecurity enthusiasts looking to learn 
 4. Operating System Detection
    Identifies the target's operating system (Linux-based, Windows-based, or Unknown) using TTL values from response packets.
 
-##How It Works:
+## How It Works:
 
 1. Port Scanning:
-   > The tool uses TCP connections to identify open ports on the target machine.
+> The tool uses TCP connections to identify open ports on the target machine.
 2. OS Detection:
-> The TTL value from the response packet is analyzed:
+>> The TTL value from the response packet is analyzed:
 > TTL ≤ 64: Likely Linux-based OS.
 > TTL > 64 and ≤ 128: Likely Windows-based OS.
 > TTL > 128: Unknown or other OS.
